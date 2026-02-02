@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sai Ram E | Backend Developer</title>
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --text-color: #ffffff;
+            --text-secondary: #dbeafe; /* Light blue-white */
+            --accent-color: #38bdf8; /* Bright Cyan/Sky Blue */
+            
+            /* Glassmorphism variables */
+            --glass-bg: rgba(15, 23, 42, 0.6); /* Dark blue transparent */
+            --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            --glass-blur: blur(12px);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            /* Deep Blue Gradient Background designed for glass effect */
+            background: rgb(10,25,47);
+            background: linear-gradient(135deg, rgba(10,25,47,1) 0%, rgba(20,40,80,1) 50%, rgba(10,15,30,1) 100%);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        /* The "Glass" CSS class */
+        .glass-panel {
+            background: var(--glass-bg);
+            box-shadow: var(--glass-shadow);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur); /* Safari support */
+            border-radius: 15px;
+            border: var(--glass-border);
+        }
+
+        /* Navigation (The 3 Tabs) */
+        nav {
+            /* Applying glass style directly to nav */
+            background: rgba(15, 23, 42, 0.8); /* Slightly less transparent for nav */
+            backdrop-filter: blur(15px);
+            border-bottom: var(--glass-border);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+        }
+
+        .tabs {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .tabs li a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .tabs li a:hover {
+            color: #fff;
+            background: rgba(56, 189, 248, 0.2); /* Light blue hover pill */
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+            min-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            /* Instead of a border-left, let's use a glowing underline */
+            position: relative;
+            display: inline-block;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            width: 60px;
+            height: 4px;
+            background: var(--accent-color);
+            border-radius: 2px;
+            box-shadow: 0 0 10px var(--accent-color);
+        }
+
+        /* Hero Section (Home) */
+        #home {
+            align-items: flex-start;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #ffffff, #a5f3fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.8rem;
+            color: var(--accent-color);
+            margin-bottom: 25px;
+            text-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+        }
+
+        .btn {
+            display: inline-block;
+            background: rgba(56, 189, 248, 0.2);
+            color: var(--accent-color);
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 30px;
+            margin-top: 25px;
+            font-weight: bold;
+            border: 1px solid var(--accent-color);
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: var(--accent-color);
+            color: #fff;
+            box-shadow: 0 0 20px var(--accent-color);
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        /* Adding glass effect to skill cards */
+        .skill-card {
+            background: var(--glass-bg);
+            box-shadow: var(--glass-shadow);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border-radius: 15px;
+            border: var(--glass-border);
+            
+            padding: 30px 20px;
+            text-align: center;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-color);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+        }
+
+        .skill-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--accent-color);
+            text-shadow: 0 0 15px rgba(56, 189, 248, 0.6);
+        }
+
+        /* Contact Section */
+        /* Adding glass effect to contact box */
+        .contact-box {
+            background: var(--glass-bg);
+            box-shadow: var(--glass-shadow);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border-radius: 20px;
+            border: var(--glass-border);
+            
+            padding: 50px;
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.8rem; }
+            .hero-subtitle { font-size: 1.4rem; }
+            .nav-container { flex-direction: column; gap: 15px; }
+            section { padding: 60px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Sai Ram E.</div>
+            <ul class="tabs">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="home">
+        <div class="glass-panel" style="padding: 40px; display: inline-block;">
+            <p style="color: var(--text-secondary); font-size: 1.1rem;">Hello, I am</p>
+            <h1 class="hero-title">Sai Ram E</h1>
+            <h3 class="hero-subtitle">Backend Developer</h3>
+            <p style="max-width: 600px; color: var(--text-secondary); font-size: 1.1rem;">
+                A beginner developer focused on building robust server-side logic. 
+                Intrigued by system architecture, data management, and the "under the hood" mechanics of web applications.
+            </p>
+            <a href="#contact" class="btn">Let's Connect</a>
+        </div>
+    </section>
+
+    <section id="skills">
+        <h2>Technical Skills</h2>
+        
+        <div class="skills-grid">
+            <div class="skill-card">
+                <div class="skill-icon">&lt;/&gt;</div>
+                <h3>HTML & CSS</h3>
+                <p style="color: var(--text-secondary);">Frontend Foundations</p>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-icon">⚙️</div>
+                <h3>Operating Systems</h3>
+                <p style="color: var(--text-secondary);">Linux/Windows Env.</p>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-icon">🐙</div>
+                <h3>GitHub</h3>
+                <p style="color: var(--text-secondary);">Version Control</p>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-icon">💻</div>
+                <h3>VS Code</h3>
+                <p style="color: var(--text-secondary);">Code Editor</p>
+            </div>
+            
+            <div class="skill-card" style="border-style: dashed; opacity: 0.7;">
+                <div class="skill-icon">🚀</div>
+                <h3>Backend Logic</h3>
+                <p style="color: var(--text-secondary);">Learning in progress...</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Contact Me</h2>
+        <div class="contact-box">
+            <p style="font-size: 1.2rem; margin-bottom: 30px;">I am currently open to learning opportunities and beginner backend roles.</p>
+            
+            <div style="margin-bottom: 30px; color: var(--text-secondary);">
+                <p><strong>Email:</strong> sairam.e@example.com</p>
+                <p style="margin-top: 10px;"><strong>GitHub:</strong> github.com/sairam-e</p>
+            </div>
+            
+            <a href="mailto:sairam.e@example.com" class="btn">Send Email</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Sai Ram E. | Designed with Glassmorphism.</p>
+    </footer>
+
+</body>
+</html>
